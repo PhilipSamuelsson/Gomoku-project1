@@ -57,7 +57,7 @@ const Game = () => {
         // Function to fetch the game board and update state
         const fetchGameBoard = async () => {
             try {
-                const response = await fetch('/api/get-board');
+                const response = await fetch('http://localhost:8000/api/get-board');
                 if (response.ok) {
                     const data = await response.json();
                     setBoard(data.board);
