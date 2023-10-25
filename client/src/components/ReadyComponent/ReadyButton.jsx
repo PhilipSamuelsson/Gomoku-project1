@@ -1,6 +1,6 @@
 
 
-export default function Ready() {
+export default function ReadyButton() {
   return (
     <div>Ready</div>
   )
