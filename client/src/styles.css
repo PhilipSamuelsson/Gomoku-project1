@@ -1,0 +1,34 @@
+.board {
+    display: grid;
+    grid-template-columns: repeat(15, 40px);
+    gap: 4px; /* Adjust the gap between cells as needed */
+    width: 600px; /* Adjust the total width of the board as needed */
+    grid-template-rows: repeat(15, 40px); /* Add this line for rows */
+}
+
+.board-cell {
+    width: 40px;
+    height: 40px;
+    background: #e0e0e0; /* Adjust the background color of the cells as needed */
+    border: 1px solid #000; /* Add borders to the cells */
+    cursor: pointer;
+}
+
+.stone {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%; /* Correct the typo */
+    border: 2px solid #000; /* Add borders to the stones */
+}
+
+.stone.white {
+    background-color: white; /* Set the background color to white for white stones */
+}
+
+.stone.black {
+    background-color: black;
+}
+
+.board-cell.clicked {
+    background-color: pink;
+}
