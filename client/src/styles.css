@@ -15,9 +15,9 @@
 }
 
 .stone {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%; /* Correct the typo */
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
     border: 2px solid #000; /* Add borders to the stones */
 }
 
@@ -30,5 +30,4 @@
 }
 
 .board-cell.clicked {
-    background-color: pink;
 }
