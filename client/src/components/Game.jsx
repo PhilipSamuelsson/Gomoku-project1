@@ -7,13 +7,26 @@ const Game = () => {
     const [gameOver, setGameOver] = useState(false);
     const [winner, setWinner] = useState(null);
 
-    // Function to restart the game
-    const restartGame = () => {
-        setBoard([...Array(15)].map(() => Array(15).fill(null)));
-        setCurrentPlayer('player1');
-        setGameOver(false);
-        setWinner(null);
+// Function to restart the game
+const restartGame = async () => {
+    try {
+        const response = await fetch('http://localhost:8000/api/reset-game', {
+            method: 'POST',
+        });
+        if (response.ok) {
+            // Reset the game on the client
+            setBoard([...Array(15)].map(() => Array(15).fill(null)));
+            setCurrentPlayer('player1');
+            setGameOver(false);
+            setWinner(null);
+        } else {
+            const errorMessage = await response.text();
+            console.error(`Failed to reset the game. Status: ${response.status}. Error: ${errorMessage}`);
+        }
+    } catch (error) {
+        console.error('Error resetting the game:', error);
     }
+}
 
     useEffect(() => {
         // Function to fetch the initial game board data when the component mounts
