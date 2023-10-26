@@ -4,7 +4,7 @@ const http = require('http').createServer(app)
 const bodyParser = require('body-parser')
 const cors = require('cors')
 
-app.use(cors({ origin: 'http://localhost:3000' }))
+app.use(cors({ origin: 'http://localhost:5173' }))
 app.use(express.static('public'))
 app.use(bodyParser.json())
 
@@ -30,13 +30,19 @@ app.get('/api/get-board', (req, res) => {
 })
 
 // HTTP endpoint for handling player moves
-app.post('/make-move', (req, res) => {
+app.post('/api/make-move', (req, res) => {
     const { row, col, player } = req.body
+    console.log('Received move data from client:', { row, col, player })
 
-    // Call the makeMove function directly without validation
-    makeMove(row, col, player)
+    // Update the game board with the move
+    game.board[row][col] = player
 
-    // Respond with a success status
+    // Log the updated game board
+    console.log('Updated game board:', game.board)
+
+    // Log the next player (you should have logic here to switch players)
+    console.log('Next player:', game.currentPlayer)
+
     res.status(200).send('Move successful')
 })
 
