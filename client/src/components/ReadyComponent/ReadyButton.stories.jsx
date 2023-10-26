@@ -6,4 +6,4 @@ export default {
   component: ReadyButton,
 };
 
-export const Default = () => <ReadyButton />;
+export const Default = () => <ReadyButton title="Start Game"/>;
