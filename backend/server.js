@@ -29,6 +29,12 @@ app.get('/api/get-board', (req, res) => {
     res.json({ board: game.board, currentPlayer: game.currentPlayer })
 })
 
+app.post('/api/reset-game', (req, res) => {
+    game.board = [...Array(15)].map(() => Array(15).fill(null))
+    game.currentPlayer = 'player1'
+    res.status(200).send('Game reset successfully')
+})
+
 // HTTP endpoint for handling player moves
 app.post('/api/make-move', (req, res) => {
     const { row, col, player } = req.body
