@@ -1,18 +1,18 @@
-const functions = require("firebase-functions");
-const express = require("express");
-const bodyParser = require("body-parser");
-const cors = require("cors");
+const functions = require('firebase-functions')
+const express = require('express')
+const bodyParser = require('body-parser')
+const cors = require('cors')
 
-const app = express();
+const app = express()
 
-app.use(cors({origin: "https://starwars-gomoku.web.app"}));
-app.use(express.static("public"));
-app.use(bodyParser.json());
+app.use(cors({ origin: 'https://starwars-gomoku.web.app' }))
+app.use(express.static('public'))
+app.use(bodyParser.json())
 
 const game = {
-  board: [...Array(15)].map(() => Array(15).fill(null)),
-  currentPlayer: "player1",
-};
+    board: [...Array(15)].map(() => Array(15).fill(null)),
+    currentPlayer: 'player1'
+}
 
 /**
  * Places the player's stone on the board and switches to the other player.
@@ -25,39 +25,36 @@ const game = {
 //   game.currentPlayer = player === "player1" ? "player2" : "player1";
 // }
 
-app.get("/", (req, res) => {
-  res.send("tjoooo allihopa");
-});
+app.get('/', (req, res) => {
+    res.send('tjoooo allihopa')
+})
 
-app.get("/api/get-board", (req, res) => {
-  res.json({board: game.board, currentPlayer: game.currentPlayer});
-});
+app.get('/api/get-board', (req, res) => {
+    res.json({ board: game.board, currentPlayer: game.currentPlayer })
+})
 
-app.post("/api/reset-game", (req, res) => {
-  game.board = [...Array(15)].map(() => Array(15).fill(null));
-  game.currentPlayer = "player1";
-  res.status(200).send("Game reset successfully");
-});
+app.post('/api/reset-game', (req, res) => {
+    game.board = [...Array(15)].map(() => Array(15).fill(null))
+    game.currentPlayer = 'player1'
+    res.status(200).send('Game reset successfully')
+})
 
-app.post("/api/make-move", (req, res) => {
-  const {row, col, player} = req.body;
-  console.log("Received move data from client:", {row, col, player});
+app.post('/api/make-move', (req, res) => {
+    const { row, col, player } = req.body
+    console.log('Received move data from client:', { row, col, player })
 
-  game.board[row][col] = player;
-  console.log("Updated game board:", game.board);
-  console.log("Next player:", game.currentPlayer);
+    game.board[row][col] = player
+    game.currentPlayer = player === 'player1' ? 'player2' : 'player1' // Added
 
-  res.status(200).send("Move successful");
-});
+    console.log('Updated game board:', game.board)
+    console.log('Next player:', game.currentPlayer)
 
-exports.app = functions.https.onRequest(app);
+    res.status(200).send('Move successful')
+})
 
-
-
-
+exports.app = functions.https.onRequest(app)
 
 // GAMMLA KODEN
-
 
 // const express = require('express')
 // const app = express()
