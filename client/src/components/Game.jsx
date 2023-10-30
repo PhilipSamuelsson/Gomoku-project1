@@ -10,7 +10,7 @@ const Game = () => {
 // Function to restart the game
 const restartGame = async () => {
     try {
-        const response = await fetch('http://localhost:8000/api/reset-game', {
+        const response = await fetch('https://starwars-gomoku.firebaseapp.com/api/reset-game', {
             method: 'POST',
         });
         if (response.ok) {
@@ -32,7 +32,7 @@ const restartGame = async () => {
         // Function to fetch the initial game board data when the component mounts
         const fetchInitialGameBoard = async () => {
             try {
-                const response = await fetch('http://localhost:8000/api/get-board');
+                const response = await fetch('https://starwars-gomoku.firebaseapp.com/api/get-board');
                 if (response.ok) {
                     const data = await response.json();
                     setBoard(data.board);
@@ -112,7 +112,7 @@ function checkForWin(board, row, col, player) {
 
     const sendMoveToServer = async (row, col, player) => {
         try {
-            const response = await fetch('http://localhost:8000/api/make-move', {
+            const response = await fetch('https://starwars-gomoku.firebaseapp.com/api/make-move', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -134,7 +134,7 @@ function checkForWin(board, row, col, player) {
 
     return (
         <div>
-            <h1>Online Gomoku Game</h1>
+            <h1>Online Gomokuuuu Game</h1>
             {gameOver ? (
                 <div>
                     {winner ? (
