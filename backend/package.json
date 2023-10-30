@@ -1,0 +1,8 @@
+{
+    "dependencies": {
+        "ws": "^8.14.2"
+    },
+    "devDependencies": {
+        "prettier": "^3.0.3"
+    }
+}

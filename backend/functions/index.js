@@ -1,13 +1,53 @@
+/* eslint-enable quotes */
+
 const functions = require('firebase-functions')
 const express = require('express')
 const bodyParser = require('body-parser')
 const cors = require('cors')
 
-const app = express()
+const socketIO = require('socket.io')(http)
 
+socketSetup(http)
+
+const app = express()
 app.use(cors({ origin: 'https://starwars-gomoku.web.app' }))
 app.use(express.static('public'))
 app.use(bodyParser.json())
+
+// Create an HTTP server from the Express app
+const server = http.createServer(app)
+
+// Create a WebSocket server using the HTTP server
+socketIO.on('connection', (socket) => {
+    console.log('A user connected')
+
+    // Handle user move messages
+    socket.on('move', (data) => {
+        // Process the move and update the game state
+        // ...
+
+        // Broadcast the updated game state to all connected clients
+        socketIO.emit('gameState', game)
+    })
+
+    socket.on('disconnect', () => {
+        console.log('A user disconnected')
+    })
+})
+
+// Handle WebSocket connections
+wss.on('connection', (ws) => {
+    console.log('WebSocket connection established')
+
+    // You can handle WebSocket messages and game logic here
+    ws.on('message', (message) => {
+        console.log('Received WebSocket message:', message)
+
+        // Handle the WebSocket message (e.g., game move logic)
+        // Update game state and broadcast to connected clients
+        // Example: game.board[row][col] = player;
+    })
+})
 
 const game = {
     board: [...Array(15)].map(() => Array(15).fill(null)),
