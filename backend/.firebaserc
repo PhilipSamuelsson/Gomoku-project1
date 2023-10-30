@@ -1,5 +1,5 @@
 {
   "projects": {
-    "default": "starwars-gomoku"
+    "default": "starwars-gomoku-backend"
   }
 }
