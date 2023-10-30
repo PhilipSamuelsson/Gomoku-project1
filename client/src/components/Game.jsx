@@ -10,7 +10,7 @@ const Game = () => {
 // Function to restart the game
 const restartGame = async () => {
     try {
-        const response = await fetch('https://starwars-gomoku.firebaseapp.com/api/reset-game', {
+        const response = await fetch('https://us-central1-starwars-gomoku-backend.cloudfunctions.net/app/api/reset-game', {
             method: 'POST',
         });
         if (response.ok) {
@@ -32,7 +32,7 @@ const restartGame = async () => {
         // Function to fetch the initial game board data when the component mounts
         const fetchInitialGameBoard = async () => {
             try {
-                const response = await fetch('https://starwars-gomoku.firebaseapp.com/api/get-board');
+                const response = await fetch('https://us-central1-starwars-gomoku-backend.cloudfunctions.net/app/api/get-board');
                 if (response.ok) {
                     const data = await response.json();
                     setBoard(data.board);
@@ -112,7 +112,7 @@ function checkForWin(board, row, col, player) {
 
     const sendMoveToServer = async (row, col, player) => {
         try {
-            const response = await fetch('https://starwars-gomoku.firebaseapp.com/api/make-move', {
+            const response = await fetch('https://us-central1-starwars-gomoku-backend.cloudfunctions.net/app/api/make-move', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
