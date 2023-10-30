@@ -4,7 +4,7 @@ const http = require('http').createServer(app)
 const bodyParser = require('body-parser')
 const cors = require('cors')
 
-app.use(cors({ origin: 'http://localhost:5173' }))
+app.use(cors({ origin: 'https://starwars-gomoku.web.app/' }))
 app.use(express.static('public'))
 app.use(bodyParser.json())
 
