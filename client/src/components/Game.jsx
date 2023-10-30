@@ -134,7 +134,7 @@ function checkForWin(board, row, col, player) {
 
     return (
         <div>
-            <h1>Online Gomokuuuu Game</h1>
+            <h1>Online Gomoku Game</h1>
             {gameOver ? (
                 <div>
                     {winner ? (
