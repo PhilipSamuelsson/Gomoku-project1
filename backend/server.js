@@ -4,7 +4,7 @@ const http = require('http').createServer(app)
 const bodyParser = require('body-parser')
 const cors = require('cors')
 
-app.use(cors({ origin: 'https://starwars-gomoku.web.app/' }))
+app.use(cors({ origin: 'http://localhost:5174' }))
 app.use(express.static('public'))
 app.use(bodyParser.json())
 
@@ -53,6 +53,6 @@ app.post('/api/make-move', (req, res) => {
 })
 
 const PORT = process.env.PORT || 8000
-http.listen(PORT, () => {
+app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`)
 })
