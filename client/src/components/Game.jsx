@@ -23,7 +23,10 @@ const restartGame = async () => {
             const errorMessage = await response.text();
             console.error(`Failed to reset the game. Status: ${response.status}. Error: ${errorMessage}`);
         }
+    } catch (error) {
+        console.error('Error resetting the game:', error);
     }
+}
 
     useEffect(() => {
         // Function to fetch the initial game board data when the component mounts
