@@ -7,24 +7,21 @@ const Game = () => {
     const [gameOver, setGameOver] = useState(false);
     const [winner, setWinner] = useState(null);
 
-    // Function to restart the game
-    const restartGame = async () => {
-        try {
-            const response = await fetch('http://localhost:8000/api/reset-game', {
-                method: 'POST',
-            });
-            if (response.ok) {
-                // Reset the game on the client
-                setBoard([...Array(15)].map(() => Array(15).fill(null)));
-                setCurrentPlayer('player1');
-                setGameOver(false);
-                setWinner(null);
-            } else {
-                const errorMessage = await response.text();
-                console.error(`Failed to reset the game. Status: ${response.status}. Error: ${errorMessage}`);
-            }
-        } catch (error) {
-            console.error('Error resetting the game:', error);
+// Function to restart the game
+const restartGame = async () => {
+    try {
+        const response = await fetch('https://us-central1-starwars-gomoku-backend.cloudfunctions.net/app/api/reset-game', {
+            method: 'POST',
+        });
+        if (response.ok) {
+            // Reset the game on the client
+            setBoard([...Array(15)].map(() => Array(15).fill(null)));
+            setCurrentPlayer('player1');
+            setGameOver(false);
+            setWinner(null);
+        } else {
+            const errorMessage = await response.text();
+            console.error(`Failed to reset the game. Status: ${response.status}. Error: ${errorMessage}`);
         }
     }
 
@@ -32,7 +29,7 @@ const Game = () => {
         // Function to fetch the initial game board data when the component mounts
         const fetchInitialGameBoard = async () => {
             try {
-                const response = await fetch('http://localhost:8000/api/get-board');
+                const response = await fetch('https://us-central1-starwars-gomoku-backend.cloudfunctions.net/app/api/get-board');
                 if (response.ok) {
                     const data = await response.json();
                     setBoard(data.board);
@@ -112,7 +109,7 @@ const Game = () => {
 
     const sendMoveToServer = async (row, col, player) => {
         try {
-            const response = await fetch('http://localhost:8000/api/make-move', {
+            const response = await fetch('https://us-central1-starwars-gomoku-backend.cloudfunctions.net/app/api/make-move', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -133,7 +130,9 @@ const Game = () => {
 
 
     return (
+
         <div id="container">
+
             {gameOver ? (
                 <div id="game-over">
                     {winner ? (
