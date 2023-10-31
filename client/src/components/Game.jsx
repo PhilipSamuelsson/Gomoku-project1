@@ -23,10 +23,7 @@ const restartGame = async () => {
             const errorMessage = await response.text();
             console.error(`Failed to reset the game. Status: ${response.status}. Error: ${errorMessage}`);
         }
-    } catch (error) {
-        console.error('Error resetting the game:', error);
     }
-}
 
     useEffect(() => {
         // Function to fetch the initial game board data when the component mounts
@@ -55,39 +52,39 @@ const restartGame = async () => {
     }, []);
 
     // Check for win function
-function checkForWin(board, row, col, player) {
-    const directions = [
-        [0, 1],  // Right
-        [1, 0],  // Down
-        [1, 1],  // Diagonal right-down
-        [-1, 1]  // Diagonal left-down
-    ];
+    function checkForWin(board, row, col, player) {
+        const directions = [
+            [0, 1],  // Right
+            [1, 0],  // Down
+            [1, 1],  // Diagonal right-down
+            [-1, 1]  // Diagonal left-down
+        ];
 
-    for (const [dx, dy] of directions) {
-        let count = 1;
+        for (const [dx, dy] of directions) {
+            let count = 1;
 
-        for (let direction of [-1, 1]) {
-            let r = row + dx * direction;
-            let c = col + dy * direction;
+            for (let direction of [-1, 1]) {
+                let r = row + dx * direction;
+                let c = col + dy * direction;
 
-            while (r >= 0 && r < board.length && c >= 0 && c < board[0].length && board[r][c] === player) {
-                count++;
-                r += dx * direction;
-                c += dy * direction;
+                while (r >= 0 && r < board.length && c >= 0 && c < board[0].length && board[r][c] === player) {
+                    count++;
+                    r += dx * direction;
+                    c += dy * direction;
+                }
+            }
+
+            if (count >= 5) {
+                console.log('WINNER!!');
+                return true;
             }
         }
 
-        if (count >= 5) {
-            console.log('WINNER!!');
-            return true;
-        }
+        return false;
     }
 
-    return false;
-}
-
-       // Handle player moves and check for wins
-       const handleMove = (row, col) => {
+    // Handle player moves and check for wins
+    const handleMove = (row, col) => {
         // Check if the cell is empty and the game is still in progress
         if (board[row][col] === null && !gameOver) {
             // Update the board with the current player's stone
@@ -133,10 +130,11 @@ function checkForWin(board, row, col, player) {
 
 
     return (
-        <div>
-            <h1>Online Gomokuuuu Game</h1>
+
+        <div id="container">
+
             {gameOver ? (
-                <div>
+                <div id="game-over">
                     {winner ? (
                         <p>{winner} wins!</p>
                     ) : (
