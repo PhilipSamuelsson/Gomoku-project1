@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import Board from './Board';
 
 const Game = () => {
-    const [board, setBoard] = useState([...Array(15)].map(() => Array(15).fill(0))); // Initialize with 0 instead of null
+    const [board, setBoard] = useState([...Array(15)].map(() => Array(15).fill(0)));
     const [currentPlayer, setCurrentPlayer] = useState('player1');
     const [gameOver, setGameOver] = useState(false);
     const [winner, setWinner] = useState(null);
@@ -15,7 +15,7 @@ const Game = () => {
             });
             if (response.ok) {
                 // Reset the game on the client
-                setBoard([...Array(15)].map(() => Array(15).fill(0))); // Reset to 0
+                setBoard([...Array(15)].map(() => Array(15).fill(0)));
                 setCurrentPlayer('player1');
                 setGameOver(false);
                 setWinner(null);
@@ -46,7 +46,7 @@ const Game = () => {
             }
         }
 
-        fetchInitialGameBoard(); // Fetch initial game board data when the component mounts
+        fetchInitialGameBoard(); // Fetch initial game board data when component mounts
 
         // Clean up any resources (e.g., clearInterval) if needed
         return () => {
@@ -54,6 +54,7 @@ const Game = () => {
         }
     }, []);
 
+    // Check for win function
     function checkForWin(board, row, col, player) {
         const directions = [
             [0, 1],  // Right
@@ -132,7 +133,7 @@ const Game = () => {
 
     return (
         <div>
-            <h1>Online Gomokuuuu Game</h1>
+            <h1>Online Gomoku Game</h1>
             {gameOver ? (
                 <div>
                     {winner ? (
