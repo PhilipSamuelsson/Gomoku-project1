@@ -46,7 +46,7 @@ const Game = () => {
             }
         }
 
-        fetchInitialGameBoard(); // Fetch initial game board data when component mounts
+        fetchInitialGameBoard(); // Fetch initial game board data when the component mounts
 
         // Clean up any resources (e.g., clearInterval) if needed
         return () => {

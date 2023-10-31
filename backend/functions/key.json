@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "starwars-gomoku-backend",
+  "private_key_id": "131837bcacd4af274a8db9d83f0c39a18fc6c076",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEugIBADANBgkqhkiG9w0BAQEFAASCBKQwggSgAgEAAoIBAQDF/d2Yue+vELdr\n/o2iXdJbLu8WofPEUcJk+hEdw6abYXdg0RccPN3j0uKtfui+Z7bs/izfu9wR1Yv6\nh27wQQElwRiONftYzEwf9mryrstVFOoI6fo60NrFPR0DrH/Gd0Z234W6mHlkBr1o\nKgIMcPX+hpy8aMY5qnUyfbniG5SOGA2MLcUqLDLnDP9KbH4H8xwV8MYbinOjMoGJ\n35NVsRAqFBFRseRw2/2f7OPp3vZzyOslnz05alAxBdKiCUBj5YMDZ0D+/Yd1tFXg\nGzo3ikCn1sSc/u1hGODnrLEErPY49btXcjIsTIa38nv9wkFAUJXKJTg1qfWYes71\niXpePI6FAgMBAAECgf9eCB52VS3AYfAQb5T/crpfvqqj1Rww4PkHfBHPplw6RNAC\n60r5M5nZLw75LIzdNo9qKaKmSlJP0LE/tZK6ss9uCYc1WJicU8ApGJ8yeFGZgZVP\n0SVGnxVHwlPwABJZ78vyKQvE0yV+nAouA8V1TduG8Tz/Pm47yk5e7IHxIP2CKJLR\njeSkZ9lhCUti60RUm65KtEdBJSN6uIAuC/TbR8MrBpvqg5366OI4y7ErPBPJcGhs\nyrOqX0PfTjpsTV1DGNgnLa60vBOUdS6gHhI5XqAuRKAIZuwlfwqM+D47ZyXQMeTS\nGZhIT6RNz26CV7zUZ19+Qb6j4fWwXwmEFjB2aoECgYEA/n0mQrEWwrcQ0CXatOlQ\nwdCjhJUJL2CX6J3uBh2Uq28rJZP6sJPjT+V0ZJOj/+c7QnRiMeMm9BMo6p6S2uSL\nuidJRRiDtPchbglUwyDRBvhOGcVAqf2/gDYXKbrqF0nt+8+ITBlLDz/3nemkE1yF\ncBVGhaAteqjt8Pq23wPOwoECgYEAxyrVlVw0g2pN72/reaLYXwsdYeXEV9NOUCN3\nJH8Gj6bTof5goTBCe/iOyXTqQiDI5/g7Mrr/mhEUqtJxwXrevJPHTQgp6xlChLPt\n4ZPHDVzwbHJEwwXSwOyEPbIHjfDw2lgGgGDCG892EpI5Yf122Wv0ewDzwoyYJaFt\nSJtNwgUCgYAR47xPzeEauQG+kBqqwwgBR+hmxo9JvFGRcaCs32F3F66BysBBr3O4\nRxoCg/pwX9HjnwjUFvLDD6G9tH4AUzabVG2rJMkFbKX19UP3H5RyF/xthVdBW+wd\nWDASp+gS0QigvfsH1nNXVBjVCfqVvdhHg8dcV2E7ESsA2K8ISF09gQKBgAchJ2gj\nVtXldki97uX5yFkOosygVvj13XXM7zTlPyzhQe4olvjuK1MYwLPBdalMVyTGpAfa\n3c98EQtUYTIV3edOOvIs+qMp0lHBxyAuFBAMZabcKE365WJ2lP1IZDDWkSifwgvS\nauBn+sgLZ/Z0Bk8eKDBHBnLOaZvfPXQ96vipAoGAF5YQurIU5ZgX6tR0QC5CHija\nJMgHRqoGgEsAznzqczI4+Yhw2n7/hfYuwT8+Tn2aRIeOi9e0O/SdrULXipFMEhYX\nnxRxKLo8YBSsugrpjLiF/5KrDAGYtkka4uzplt1kvkQ9mVFAWktTFwCCMXFTuQn9\nUrYOSCBY1DVfD1EM/qc=\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-cw9hw@starwars-gomoku-backend.iam.gserviceaccount.com",
+  "client_id": "102698491671635435950",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-cw9hw%40starwars-gomoku-backend.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
