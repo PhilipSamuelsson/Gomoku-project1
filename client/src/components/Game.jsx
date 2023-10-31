@@ -10,7 +10,7 @@ const Game = () => {
 // Function to restart the game
 const restartGame = async () => {
     try {
-        const response = await fetch('https://us-central1-starwars-gomoku-backend.cloudfunctions.net/app/api/reset-game', {
+        const response = await fetch('http://localhost:8000/api/reset-game', {
             method: 'POST',
         });
         if (response.ok) {
@@ -32,7 +32,7 @@ const restartGame = async () => {
         // Function to fetch the initial game board data when the component mounts
         const fetchInitialGameBoard = async () => {
             try {
-                const response = await fetch('https://us-central1-starwars-gomoku-backend.cloudfunctions.net/app/api/get-board');
+                const response = await fetch('http://localhost:8000/api/get-board');
                 if (response.ok) {
                     const data = await response.json();
                     setBoard(data.board);
@@ -55,39 +55,39 @@ const restartGame = async () => {
     }, []);
 
     // Check for win function
-    function checkForWin(board, row, col, player) {
-        const directions = [
-            [0, 1],  // Right
-            [1, 0],  // Down
-            [1, 1],  // Diagonal right-down
-            [-1, 1]  // Diagonal left-down
-        ];
+function checkForWin(board, row, col, player) {
+    const directions = [
+        [0, 1],  // Right
+        [1, 0],  // Down
+        [1, 1],  // Diagonal right-down
+        [-1, 1]  // Diagonal left-down
+    ];
 
-        for (const [dx, dy] of directions) {
-            let count = 1;
+    for (const [dx, dy] of directions) {
+        let count = 1;
 
-            for (let direction of [-1, 1]) {
-                let r = row + dx * direction;
-                let c = col + dy * direction;
+        for (let direction of [-1, 1]) {
+            let r = row + dx * direction;
+            let c = col + dy * direction;
 
-                while (r >= 0 && r < board.length && c >= 0 && c < board[0].length && board[r][c] === player) {
-                    count++;
-                    r += dx * direction;
-                    c += dy * direction;
-                }
-            }
-
-            if (count >= 5) {
-                console.log('WINNER!!');
-                return true;
+            while (r >= 0 && r < board.length && c >= 0 && c < board[0].length && board[r][c] === player) {
+                count++;
+                r += dx * direction;
+                c += dy * direction;
             }
         }
 
-        return false;
+        if (count >= 5) {
+            console.log('WINNER!!');
+            return true;
+        }
     }
 
-    // Handle player moves and check for wins
-    const handleMove = (row, col) => {
+    return false;
+}
+
+       // Handle player moves and check for wins
+       const handleMove = (row, col) => {
         // Check if the cell is empty and the game is still in progress
         if (board[row][col] === null && !gameOver) {
             // Update the board with the current player's stone
@@ -112,7 +112,7 @@ const restartGame = async () => {
 
     const sendMoveToServer = async (row, col, player) => {
         try {
-            const response = await fetch('https://us-central1-starwars-gomoku-backend.cloudfunctions.net/app/api/make-move', {
+            const response = await fetch('http://localhost:8000/api/make-move', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -133,11 +133,10 @@ const restartGame = async () => {
 
 
     return (
-
-        <div id="container">
-
+        <div>
+            <h1>Online Gomokuuuu Game</h1>
             {gameOver ? (
-                <div id="game-over">
+                <div>
                     {winner ? (
                         <p>{winner} wins!</p>
                     ) : (
