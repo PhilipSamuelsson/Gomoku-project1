@@ -1,19 +1,29 @@
+import { useState } from 'react';
+import Game from './components/Game';
+import RoomJoin from './components/RoomJoin';
 
-import './styles.css'
-/* import Player from './components/Player' */
-import Game from './components/Game'
-/* import Navbar from './components/Navbar' */
+const App = () => {
+    const [joinedRoom, setJoinedRoom] = useState(null);
+    const [waitingForPlayer, setWaitingForPlayer] = useState(false);
 
+    const handleJoinRoom = (roomCode) => {
+        setWaitingForPlayer(true);
+        // You can handle the room joining here, for example, by updating state
+        setJoinedRoom(roomCode);
+    };
 
-
-export default function App() {
     return (
-        <div className="App">
-{/*             <Navbar />
-            <Player /> */}
-            <Game />
-            {/* Render the Game component here */}
-            {/* Add other components or content as needed */}
+        <div>
+            <h1>Online Gomoku Game</h1>
+            {waitingForPlayer ? (
+                <p>Waiting for another player...</p>
+            ) : joinedRoom ? (
+                <Game roomCode={joinedRoom} />
+            ) : (
+                <RoomJoin onJoinRoom={handleJoinRoom} />
+            )}
         </div>
-    )
-}
+    );
+};
+
+export default App;

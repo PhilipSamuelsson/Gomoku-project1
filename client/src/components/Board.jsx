@@ -1,26 +1,21 @@
-
-import PropTypes from 'prop-types'
-import Stone from './Stone' // Import your Stone component
-
+import PropTypes from 'prop-types';
+import Stone from './Stone';
 
 const Board = ({ board, handleMove }) => {
-
-
-
     return (
         <div className="board">
-            {board.map((row, rowIndex) => (
+            {Object.keys(board).map((row, rowIndex) => (
                 <div key={rowIndex} className="board-row">
-                    {row.map((cell, colIndex) => (
+                    {Object.keys(board[row]).map((col, colIndex) => (
                         <div
                             key={colIndex}
-                            className={`board-cell${cell ? ' clicked' : ''}`}
-                            onClick={() => handleMove(rowIndex, colIndex)}
+                            className={`board-cell${board[row][col] ? ' clicked' : ''}`}
+                            onClick={() => handleMove(row, col)}
                         >
-                            {cell ? (
+                            {board[row][col] ? (
                                 <Stone
                                     color={
-                                        cell === 'player1' ? 'white' : 'black'
+                                        board[row][col] === 'player1' ? 'white' : 'black'
                                     }
                                 />
                             ) : null}
@@ -29,12 +24,12 @@ const Board = ({ board, handleMove }) => {
                 </div>
             ))}
         </div>
-    )
+    );
 }
 
 Board.propTypes = {
-    board: PropTypes.array.isRequired,
+    board: PropTypes.object.isRequired, // Change the prop type to object
     handleMove: PropTypes.func.isRequired
 }
 
-export default Board
+export default Board;
