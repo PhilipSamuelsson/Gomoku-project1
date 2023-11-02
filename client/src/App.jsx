@@ -1,24 +1,40 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Game from './components/Game';
 import RoomJoin from './components/RoomJoin';
+import './styles.css'
 
 const App = () => {
     const [joinedRoom, setJoinedRoom] = useState(null);
-    const [waitingForPlayer, setWaitingForPlayer] = useState(false);
+    const [ws, setWs] = useState(null);
+
+    useEffect(() => {
+        if (joinedRoom) {
+            const ws = new WebSocket('ws://localhost:8080');
+            setWs(ws);
+
+            ws.onopen = () => {
+                ws.send(JSON.stringify({ type: 'create-or-join-room', roomCode: String(joinedRoom) }));
+            };
+
+            ws.onerror = (error) => {
+                console.error('WebSocket error:', error);
+            };
+
+            return () => {
+                ws.close();
+            };
+        }
+    }, [joinedRoom]);
 
     const handleJoinRoom = (roomCode) => {
-        setWaitingForPlayer(true);
-        // You can handle the room joining here, for example, by updating state
         setJoinedRoom(roomCode);
     };
 
     return (
         <div>
             <h1>Online Gomoku Game</h1>
-            {waitingForPlayer ? (
-                <p>Waiting for another player...</p>
-            ) : joinedRoom ? (
-                <Game roomCode={joinedRoom} />
+            {joinedRoom && ws ? (
+                <Game roomCode={joinedRoom} ws={ws} />
             ) : (
                 <RoomJoin onJoinRoom={handleJoinRoom} />
             )}

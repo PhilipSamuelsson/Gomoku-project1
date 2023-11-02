@@ -1,22 +1,10 @@
-const functions = require('firebase-functions')
 const express = require('express')
-const bodyParser = require('body-parser')
-const cors = require('cors')
-const admin = require('firebase-admin')
-
-const serviceAccount = require('./key.json')
-admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount),
-    databaseURL: 'https://starwars-gomoku-backend.firebaseio.com/'
-})
-
-const db = admin.database()
+const WebSocket = require('ws')
+const http = require('http')
 
 const app = express()
-
-app.use(cors({ origin: 'https://starwars-gomoku.web.app' }))
-app.use(express.static('public'))
-app.use(bodyParser.json())
+const server = http.createServer(app)
+const wss = new WebSocket.Server({ server })
 
 // Store rooms and their game data
 const rooms = {}
@@ -25,100 +13,190 @@ const rooms = {}
 const sendRealTimeUpdate = (roomCode, data) => {
     // Update data for all players in the room
     if (rooms[roomCode]) {
-        for (const player of rooms[roomCode].players) {
-            player.res.json(data)
+        for (const ws of rooms[roomCode].players) {
+            ws.send(JSON.stringify(data))
         }
     }
 }
 
-// Create a new room or join an existing room
-app.post('/api/create-or-join-room', (req, res) => {
-    const { roomCode } = req.body
+// Function to check for a win
+const checkForWin = (board, row, col, player) => {
+    // Check in all eight directions
+    const directions = [
+        [0, 1],
+        [1, 0],
+        [1, 1],
+        [1, -1],
+        [-1, 0],
+        [0, -1],
+        [-1, -1],
+        [-1, 1]
+    ]
 
-    if (!rooms[roomCode]) {
-        // Create a new room
-        rooms[roomCode] = {
-            board: [...Array(15)].map(() => Array(15).fill(0)),
-            currentPlayer: 'player1',
-            players: []
+    for (const [dx, dy] of directions) {
+        let count = 1 // Count of consecutive pieces
+        let r, c
+
+        // Check in one direction
+        for (let i = 1; i <= 4; i++) {
+            r = row + i * dx
+            c = col + i * dy
+
+            if (
+                r >= 0 &&
+                r < 15 &&
+                c >= 0 &&
+                c < 15 &&
+                board[r][c] === player
+            ) {
+                count++
+            } else {
+                break
+            }
+        }
+
+        for (let i = 1; i <= 4; i++) {
+            r = row - i * dx
+            c = col - i * dy
+
+            if (
+                r >= 0 &&
+                r < 15 &&
+                c >= 0 &&
+                c < 15 &&
+                board[r][c] === player
+            ) {
+                count++
+            } else {
+                break
+            }
+        }
+
+        if (count >= 5) {
+            return true // Player wins
         }
     }
 
-    const room = rooms[roomCode]
+    return false
+}
 
-    // If there are already two players, reject the third
-    if (room.players.length >= 2) {
-        res.status(403).send('Room is full.')
-    } else {
-        // Add the player to the room
-        room.players.push({
-            res,
-            player: room.players.length === 0 ? 'player1' : 'player2'
-        })
+wss.on('connection', (ws) => {
+    ws.on('message', (message) => {
+        const { type, roomCode, data } = JSON.parse(message)
 
-        // If the room is full, start the game
-        if (room.players.length === 2) {
-            // Inform both players that the game has started
-            room.players[0].res.json({
-                board: room.board,
-                currentPlayer: room.currentPlayer
-            })
-            room.players[1].res.json({
-                board: room.board,
-                currentPlayer: room.currentPlayer
-            })
+        switch (type) {
+            case 'create-or-join-room': {
+                const roomCodeStr = String(roomCode)
+
+                if (!rooms[roomCodeStr]) {
+                    // Create a new room
+                    rooms[roomCodeStr] = {
+                        board: [...Array(15)].map(() => Array(15).fill(0)),
+                        currentPlayer: 'player1',
+                        players: []
+                    }
+                }
+
+                const room = rooms[roomCodeStr]
+
+                // If there are already two players, reject the third
+                if (room.players.length >= 2) {
+                    ws.send(JSON.stringify({ error: 'Room is full.' }))
+                } else {
+                    // Add the player to the room
+                    room.players.push(ws)
+
+                    // Send a 'player-joined' message to the new player
+                    ws.send(
+                        JSON.stringify({
+                            type: 'player-joined',
+                            board: room.board,
+                            currentPlayer: room.currentPlayer,
+                            player:
+                                room.players.length === 1
+                                    ? 'player1'
+                                    : 'player2' // Set the player field
+                        })
+                    )
+
+                    if (room.players.length === 2) {
+                        // The room is full, start the game
+                        room.players.forEach((playerWs) => {
+                            playerWs.send(
+                                JSON.stringify({
+                                    type: 'player-joined',
+                                    board: room.board,
+                                    currentPlayer: room.currentPlayer,
+                                    player:
+                                        playerWs === ws ? 'player2' : 'player1'
+                                })
+                            )
+                        })
+                    }
+                }
+                break
+            }
+
+            case 'make-move': {
+                const { row, col, player } = data
+
+                if (rooms[roomCode]) {
+                    const room = rooms[roomCode]
+                    const { board, currentPlayer } = room
+
+                    // Check if the player can make a move
+                    if (player === currentPlayer && board[row][col] === 0) {
+                        // Update the board with the player's move
+                        board[row][col] = player
+
+                        // Check for a win
+                        if (checkForWin(board, row, col, player)) {
+                            // Game over, the current player wins
+                            sendRealTimeUpdate(roomCode, {
+                                type: 'game-over',
+                                board,
+                                winner: player
+                            })
+                        } else {
+                            // Toggle the current player for both players in the room
+                            room.currentPlayer =
+                                player === 'player1' ? 'player2' : 'player1'
+
+                            // Send the real-time update to clients
+                            sendRealTimeUpdate(roomCode, {
+                                board,
+                                currentPlayer: room.currentPlayer
+                            })
+                        }
+                    } else {
+                        ws.send(JSON.stringify({ error: 'Invalid move.' }))
+                    }
+                } else {
+                    ws.send(JSON.stringify({ error: 'Room not found.' }))
+                }
+                break
+            }
+            case 'reset-game': {
+                if (rooms[roomCode]) {
+                    const room = rooms[roomCode]
+                    room.board = [...Array(15)].map(() => Array(15).fill(0))
+                    room.currentPlayer = 'player1'
+
+                    // Send the real-time update to clients
+                    sendRealTimeUpdate(roomCode, {
+                        type: 'game-reset',
+                        board: room.board,
+                        currentPlayer: room.currentPlayer
+                    })
+                } else {
+                    ws.send(JSON.stringify({ error: 'Room not found.' }))
+                }
+                break
+            }
         }
-    }
+    })
 })
 
-// Handle player moves
-app.post('/api/make-move', (req, res) => {
-    const { roomCode, row, col, player } = req.body
-
-    if (rooms[roomCode]) {
-        const room = rooms[roomCode]
-        const { board, currentPlayer } = room
-
-        // Check if the player can make a move
-        if (player === currentPlayer && board[row][col] === 0) {
-            // Update the board with the player's move
-            board[row][col] = player
-            room.currentPlayer = player === 'player1' ? 'player2' : 'player1'
-
-            // Send the real-time update to clients
-            sendRealTimeUpdate(roomCode, {
-                board,
-                currentPlayer: room.currentPlayer
-            })
-
-            res.status(200).send('Move successful')
-        } else {
-            res.status(403).send('Invalid move.')
-        }
-    } else {
-        res.status(404).send('Room not found.')
-    }
+server.listen(8080, () => {
+    console.log('Server started on port 8080')
 })
-
-// Reset the game
-app.post('/api/reset-game', (req, res) => {
-    const { roomCode } = req.body
-
-    if (rooms[roomCode]) {
-        const room = rooms[roomCode]
-        room.board = [...Array(15)].map(() => Array(15).fill(0))
-        room.currentPlayer = 'player1'
-
-        // Send the real-time update to clients
-        sendRealTimeUpdate(roomCode, {
-            board: room.board,
-            currentPlayer: room.currentPlayer
-        })
-
-        res.status(200).send('Game reset successfully')
-    } else {
-        res.status(404).send('Room not found.')
-    }
-})
-
-exports.app = functions.https.onRequest(app)

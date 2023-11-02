@@ -1,10 +1,20 @@
-// eslint-disable-next-line react/prop-types
+import PropTypes from 'prop-types';
+
 function Stone({ color }) {
-    const stoneStyle = {
-      backgroundColor: color === 'white' ? '#ffffff' : '#000000', // Set the background color based on the color prop
-    };
+  const stoneStyle = {
+    width: '25px',
+    height: '25px',
+    borderRadius: '50%',
+    border: '1px solid #d0d0d048',
+    boxShadow: '0px 5px 10px rgba(0, 0, 0, 0.35)',
+    backgroundColor: color === 'white' ? 'white' : 'black',
+  };
 
-    return <div className="stone" style={stoneStyle}></div>;
-  }
+  return <div className="stone" style={stoneStyle}></div>;
+}
 
-  export default Stone;
+Stone.propTypes = {
+    color: PropTypes.string.isRequired,
+  };
+
+export default Stone;
