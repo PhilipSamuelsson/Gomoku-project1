@@ -1,7 +1,5 @@
-
 import PropTypes from 'prop-types'
 import Stone from './Stone' // Import your Stone component
-
 
 const Board = ({ board, handleMove }) => {
 
