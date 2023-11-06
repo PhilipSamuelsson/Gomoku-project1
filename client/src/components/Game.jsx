@@ -2,37 +2,37 @@ import { useState, useEffect } from 'react';
 import Board from './Board';
 
 const Game = () => {
-    const [board, setBoard] = useState([...Array(15)].map(() => Array(15).fill(0)));
+    const [board, setBoard] = useState([...Array(15)].map(() => Array(15).fill(null)));
     const [currentPlayer, setCurrentPlayer] = useState('player1');
     const [gameOver, setGameOver] = useState(false);
     const [winner, setWinner] = useState(null);
 
-    // Function to restart the game
-    const restartGame = async () => {
-        try {
-            const response = await fetch('https://us-central1-starwars-gomoku-backend.cloudfunctions.net/app/api/reset-game', {
-                method: 'POST',
-            });
-            if (response.ok) {
-                // Reset the game on the client
-                setBoard([...Array(15)].map(() => Array(15).fill(0)));
-                setCurrentPlayer('player1');
-                setGameOver(false);
-                setWinner(null);
-            } else {
-                const errorMessage = await response.text();
-                console.error(`Failed to reset the game. Status: ${response.status}. Error: ${errorMessage}`);
-            }
-        } catch (error) {
-            console.error('Error resetting the game:', error);
+// Function to restart the game
+const restartGame = async () => {
+    try {
+        const response = await fetch('http://localhost:8000/api/reset-game', {
+            method: 'POST',
+        });
+        if (response.ok) {
+            // Reset the game on the client
+            setBoard([...Array(15)].map(() => Array(15).fill(null)));
+            setCurrentPlayer('player1');
+            setGameOver(false);
+            setWinner(null);
+        } else {
+            const errorMessage = await response.text();
+            console.error(`Failed to reset the game. Status: ${response.status}. Error: ${errorMessage}`);
         }
+    } catch (error) {
+        console.error('Error resetting the game:', error);
     }
+}
 
     useEffect(() => {
         // Function to fetch the initial game board data when the component mounts
         const fetchInitialGameBoard = async () => {
             try {
-                const response = await fetch('https://us-central1-starwars-gomoku-backend.cloudfunctions.net/app/api/get-board');
+                const response = await fetch('http://localhost:8000/api/get-board');
                 if (response.ok) {
                     const data = await response.json();
                     setBoard(data.board);
@@ -46,7 +46,7 @@ const Game = () => {
             }
         }
 
-        fetchInitialGameBoard(); // Fetch initial game board data when the component mounts
+        fetchInitialGameBoard(); // Fetch initial game board data when component mounts
 
         // Clean up any resources (e.g., clearInterval) if needed
         return () => {
@@ -55,41 +55,41 @@ const Game = () => {
     }, []);
 
     // Check for win function
-    function checkForWin(board, row, col, player) {
-        const directions = [
-            [0, 1],  // Right
-            [1, 0],  // Down
-            [1, 1],  // Diagonal right-down
-            [-1, 1]  // Diagonal left-down
-        ];
+function checkForWin(board, row, col, player) {
+    const directions = [
+        [0, 1],  // Right
+        [1, 0],  // Down
+        [1, 1],  // Diagonal right-down
+        [-1, 1]  // Diagonal left-down
+    ];
 
-        for (const [dx, dy] of directions) {
-            let count = 1;
+    for (const [dx, dy] of directions) {
+        let count = 1;
 
-            for (let direction of [-1, 1]) {
-                let r = row + dx * direction;
-                let c = col + dy * direction;
+        for (let direction of [-1, 1]) {
+            let r = row + dx * direction;
+            let c = col + dy * direction;
 
-                while (r >= 0 && r < board.length && c >= 0 && c < board[0].length && board[r][c] === player) {
-                    count++;
-                    r += dx * direction;
-                    c += dy * direction;
-                }
-            }
-
-            if (count >= 5) {
-                console.log(`${player} wins!`);
-                return true;
+            while (r >= 0 && r < board.length && c >= 0 && c < board[0].length && board[r][c] === player) {
+                count++;
+                r += dx * direction;
+                c += dy * direction;
             }
         }
 
-        return false;
+        if (count >= 5) {
+            console.log('WINNER!!');
+            return true;
+        }
     }
 
-    // Handle player moves and check for wins
-    const handleMove = (row, col) => {
+    return false;
+}
+
+       // Handle player moves and check for wins
+       const handleMove = (row, col) => {
         // Check if the cell is empty and the game is still in progress
-        if (board[row][col] === 0 && !gameOver) {
+        if (board[row][col] === null && !gameOver) {
             // Update the board with the current player's stone
             const updatedBoard = [...board];
             updatedBoard[row][col] = currentPlayer;
@@ -112,7 +112,7 @@ const Game = () => {
 
     const sendMoveToServer = async (row, col, player) => {
         try {
-            const response = await fetch('https://us-central1-starwars-gomoku-backend.cloudfunctions.net/app/api/make-move', {
+            const response = await fetch('http://localhost:8000/api/make-move', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -130,6 +130,7 @@ const Game = () => {
             console.error('Error making a move:', error);
         }
     }
+
 
     return (
         <div>
@@ -150,4 +151,4 @@ const Game = () => {
     )
 }
 
-export default Game;
+export default Game
