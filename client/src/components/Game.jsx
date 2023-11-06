@@ -131,11 +131,11 @@ const Game = () => {
         }
     }
 
+
     return (
-        <div>
-            <h1>Online Gomoku Game</h1>
+        <div id="container">
             {gameOver ? (
-                <div>
+                <div id="game-over">
                     {winner ? (
                         <p>{winner} wins!</p>
                     ) : (
@@ -150,4 +150,4 @@ const Game = () => {
     )
 }
 
-export default Game;
+export default Game
