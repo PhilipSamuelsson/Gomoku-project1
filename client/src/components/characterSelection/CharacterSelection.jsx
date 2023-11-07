@@ -2,13 +2,13 @@
 import PropTypes from 'prop-types';
 import './CharacterSelection.css'; // Import the CSS file
 
-const CharacterSelection = ({ characters, onSelectCharacter, isOpen, onClose }) => {
+const CharacterSelection = ({ characters, onSelectCharacter, isOpen, onClose, playerNumber  }) => {
   const closeCharacterSelection = () => {
     onClose();
   };
 
   return (
-    <div className={`characterSelection ${isOpen ? 'open' : ''}`}>
+    <div className={`characterSelection ${isOpen ? 'open' : ''} player${playerNumber}`}>
       <button onClick={closeCharacterSelection}>Close</button>
       {characters.map((character, index) => (
         <div key={index} className="characterOption" onClick={() => onSelectCharacter(character)}>
@@ -30,6 +30,7 @@ CharacterSelection.propTypes = {
   onSelectCharacter: PropTypes.func.isRequired,
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
+  playerNumber: PropTypes.oneOf([1, 2]).isRequired, // Add validation for playerNumber
 };
 
 export default CharacterSelection;

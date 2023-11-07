@@ -7,8 +7,11 @@ export default function App() {
     return (
         <div className="App">
             <Navbar />
+            <section className='player-section'>
             <Player playerNumber={1}/>
             <Player playerNumber={2}/>
+            </section>
+
             <Game />
             {/* Render the Game component here */}
             {/* Add other components or content as needed */}

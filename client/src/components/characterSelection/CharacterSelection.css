@@ -1,6 +1,6 @@
 .characterSelection {
     display: flex;
-    flex-wrap: wrap;
+    /*   flex-wrap: wrap; */
     align-items: center;
     justify-content: center;
     background-color: #f0f0f0;
@@ -9,6 +9,11 @@
     padding: 10px;
     max-width: 400px; /* Set a maximum width for the component */
     margin: 0 auto; /* Center the component horizontally */
+    position: absolute;
+    flex-direction: row;
+    margin-top: 100px;
+    margin-left: 100px;
+    margin-right: 100px;
 }
 
 .characterOption {
@@ -59,5 +64,27 @@ button:hover {
 }
 
 .characterSelection.open {
-    display: block;
+    display: flex;
+}
+
+/* Position player1's character selection below the player container */
+.characterSelection.player1 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-top: 250px;
+    margin-right: 400px;
+    /* Add any other styles as needed */
+}
+
+/* Position player2's character selection below the player container, in the opposite direction */
+.characterSelection.player2 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-top: 250px;
+    margin-left: 400px;
+    /* Add any other styles as needed */
 }

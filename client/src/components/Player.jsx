@@ -48,6 +48,7 @@ function Player({ playerNumber }) {
           onClose={toggleCharacterSelection}
           characters={starWarsCharacters}
           onSelectCharacter={selectCharacter}
+          playerNumber={playerNumber}
         />
       </div>
     </div>
@@ -56,6 +57,7 @@ function Player({ playerNumber }) {
 
 Player.propTypes = {
   playerNumber: PropTypes.number.isRequired,
+  
 };
 
 const starWarsCharacters = [
