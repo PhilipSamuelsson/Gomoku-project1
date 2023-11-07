@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import Board from './Board';
+import WinnerModule from './WinnerModule';
 
 const Game = () => {
     const [board, setBoard] = useState([...Array(15)].map(() => Array(15).fill(null)));
@@ -137,11 +138,12 @@ function checkForWin(board, row, col, player) {
             {gameOver ? (
                 <div id="game-over">
                     {winner ? (
-                        <p>{winner} wins!</p>
+                        // <p>{winner} wins!</p>
+                        <WinnerModule winner={winner} restartGame={restartGame}/>
                     ) : (
                         <p>It&apos;s a draw!</p>
                     )}
-                    <button onClick={restartGame}>Restart Game</button>
+                    {/* <button onClick={restartGame}>Restart Game</button> */}
                 </div>
             ) : (
                 <Board board={board} handleMove={handleMove} />

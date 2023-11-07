@@ -1,10 +1,18 @@
 // eslint-disable-next-line react/prop-types
+import Black1 from '../assets/Black1.png'
+import White1 from '../assets/White1.png'
+
+// eslint-disable-next-line react/prop-types
 function Stone({ color }) {
-    const stoneStyle = {
-      backgroundColor: color === 'white' ? '#ffffff' : '#000000', // Set the background color based on the color prop
-    };
+    const imageSource = color === 'white' ? Black1 : White1;
 
-    return <div className="stone" style={stoneStyle}></div>;
-  }
+    return (
+        <img
+            className="stone"
+            src={imageSource}
+            alt={color === 'white' ? 'White Stone' : 'Black Stone'}
+        />
+    );
+}
 
-  export default Stone;
+export default Stone;
