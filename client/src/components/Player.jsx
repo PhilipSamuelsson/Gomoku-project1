@@ -57,7 +57,7 @@ function Player({ playerNumber }) {
 
 Player.propTypes = {
   playerNumber: PropTypes.number.isRequired,
-  
+
 };
 
 const starWarsCharacters = [
@@ -68,8 +68,10 @@ const starWarsCharacters = [
   {
     name: 'Princess Leia',
     image: 'https://i.pinimg.com/originals/be/ae/49/beae4969d8151ee3405b9b8131e2081f.png',
-  },
-  // Add more Star Wars characters here
+  },{
+    name: 'Darth Vader',
+    image: 'https://i.pinimg.com/originals/9f/9f/73/9f9f73b4b9b89101f9419241d64233d3.png'
+  }
 ];
 
 export default Player;
