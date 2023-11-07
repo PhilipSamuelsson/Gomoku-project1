@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import bakgrund1 from "../assets/backgrounds/bakgrund1.jpg";
 import bakgrund2 from "../assets/backgrounds/bakgrund2.jpg";
 import bakgrund3 from "../assets/backgrounds/bakgrund3.jpg";
