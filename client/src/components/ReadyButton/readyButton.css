@@ -1,0 +1,68 @@
+@import url("https://fonts.googleapis.com/css2?family=Gothic+A1:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+.ready-button-content {
+  font-family: "Gothic A1", sans-serif;
+
+  width: 386px;
+  height: 76px;
+}
+
+.ready-button-active {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 386px;
+  height: 76px;
+  border-radius: 5px;
+  border: 1px rgba(255, 218, 26, 0.6) solid;
+  background-color: rgba(0, 0, 0, 0.6);
+  transition: 0.2s ease-in-out;
+}
+
+.ready-button-active:hover {
+    box-shadow: 0px 0px 50px 12px rgba(255, 218, 26, 1); ;
+  cursor: pointer;
+  
+}
+
+.ready-button-active p {
+  font-size: 32px;
+  color: white;
+}
+
+.ready-button-inactive {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 386px;
+  height: 76px;
+  font-size: 32px;
+  color: #ffda1a;
+}
+
+
+.dot {
+  width: 10px;
+  height: 10px;
+  background-color: #ffda1a;
+  border-radius: 50%;
+  margin: 0 6px;
+  animation: blink 1.5s infinite;
+}
+
+.dot:nth-child(2) {
+  animation-delay: 0.5s;
+}
+
+.dot:nth-child(3) {
+  animation-delay: 1s;
+}
+
+@keyframes blink {
+  0%, 100% {
+      opacity: 0;
+  }
+  50% {
+      opacity: 1;
+  }
+}
