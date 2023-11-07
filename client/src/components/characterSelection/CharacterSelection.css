@@ -7,7 +7,7 @@
     border: 2px solid #dd2436; /* Add a border around the selection component */
     border-radius: 5px;
     padding: 10px;
-    max-width: 400px; /* Set a maximum width for the component */
+    max-width: 500px; /* Set a maximum width for the component */
     margin: 0 auto; /* Center the component horizontally */
     position: absolute;
     flex-direction: row;
@@ -74,7 +74,7 @@ button:hover {
     align-items: center;
     justify-content: center;
     margin-top: 250px;
-    margin-right: 400px;
+    margin-right: 500px;
     /* Add any other styles as needed */
 }
 
@@ -85,6 +85,6 @@ button:hover {
     align-items: center;
     justify-content: center;
     margin-top: 250px;
-    margin-left: 400px;
+    margin-left: 500px;
     /* Add any other styles as needed */
 }
