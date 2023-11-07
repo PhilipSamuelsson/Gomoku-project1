@@ -1,29 +1,32 @@
 html,
 body {
-    width: 100%;
-    height: 100%;
-    padding: 0;
-    margin: 0;
-    font-family: 'Inter', sans-serif;
-    font-family: 'Istok Web', sans-serif;
-    font-family: 'League Spartan', sans-serif;
-    overflow-y: hidden;
+
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  font-family: "Inter", sans-serif;
+  font-family: "Istok Web", sans-serif;
+  font-family: "League Spartan", sans-serif;
+  overflow-y: hidden;
 }
 
 .board {
-    padding-top: 50px;
-    height: 100%;
-    display: grid;
-    grid-template-columns: repeat(15, 35px);
-    grid-template-rows: repeat(15, 35px); /* Add this line for rows */
-    justify-content: center;
+  padding-top: 10px;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(15, 35px);
+  grid-template-rows: repeat(15, 35px); /* Add this line for rows */
+  justify-content: center;
+
 }
 
 h1 {
-    text-align: center;
+  text-align: center;
 }
 
 #game-over {
+
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -39,15 +42,17 @@ h1 {
 .App {
     height: 100%;
     width: 100%;
+
 }
 
 #container {
-    height: 100%;
-    width: 100%;
-    position: relative;
+  height: 100%;
+  width: 100%;
+  position: relative;
 }
 
 .board-cell {
+
     display: flex;
     width: 35px;
     height: 35px;
@@ -64,10 +69,12 @@ h1 {
     width: 37px;
     height: 37px;
     display: inline-block; /* Add this line */
+
 }
 
 .board-cell,
 .board-row {
+
     box-sizing: border-box;
 }
 
@@ -81,13 +88,45 @@ h1 {
 
 .stone.white {
     background-color: white; /* Set the background color to white for white stones */
+
 }
 
 .stone.black {
-    background-color: black;
+  background-color: black;
 }
 
-.board-cell.clicked {
+.app-container {
+  position: relative;
+}
+
+.background-changer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background-size: cover;
+  background-position: center;
+}
+
+.icon-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  margin-left: 60%;
+}
+
+.icon-wrapper {
+  background: rgba(0, 0, 0, 0.3); /* Svart bakgrund med 30% genomsynlighet */
+  padding: 1px;
+  border-radius: 20%;
+}
+.icon {
+  filter: invert(100%); /* Ändrar färgen på ikonen till vit */
+  padding-left: 2px;
+  padding-top: 2px;
 }
 
 /* Player section */
