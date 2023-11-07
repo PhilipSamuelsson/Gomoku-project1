@@ -7,9 +7,11 @@ import LandingPage from './components/LandingPage/LandingPage'
 export default function App() {
     return (
         <div className="App">
+ landing-page-and-start
             <LandingPage/>
             {/* <Navbar />
             <Player />
+
             <Game />
             
             {/* Render the Game component here */}
