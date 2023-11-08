@@ -21,11 +21,14 @@ function WinnerModule(props) {
 
     return (
         <div className="Winner-container">
-            <h1 className="Winner-header">Vinnare {props.winner}</h1>
+            <div className="Inner-container">
+            <h1 className="Winner-header">
+                Winner {props.winner}</h1>
             {randomMessageKey && (
                 <p className="Winner-text">{message[randomMessageKey]}</p>
             )}
             <button className="Winner-button" onClick={props.restartGame}>New Game</button>
+            </div>
         </div>
     )
 }
