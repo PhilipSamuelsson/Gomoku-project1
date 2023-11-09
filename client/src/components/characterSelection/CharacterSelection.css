@@ -1,0 +1,98 @@
+* {
+
+
+    font-family: 'Inter', sans-serif;
+    font-family: 'Istok Web', sans-serif;
+    font-family: 'League Spartan', sans-serif;
+}
+
+
+.characterSelection {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    margin: 0 auto; /* Center the component horizontally */
+    position: absolute;
+    flex-direction: row;
+    display: none;
+}
+
+.characterOption {
+    display: flex;
+    height: 85px;
+    width: 85px;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+    font-size: 11px;
+    font-weight: bold;
+    padding: 5px;
+    margin: 5px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    border: 2px solid #dd2436;
+}
+
+.characterOption:hover {
+    transform: scale(1.05); /* Add a slight scale effect on hover */
+}
+
+.characterOption img {
+    background-color: black;
+    width: 45px;
+    height: 45px;
+    object-fit: cover;
+    border-radius: 50%; /* Create circular character options */
+    border: 2px solid #dd2436; /* Add a border around character options */
+}
+
+.characterOption div {
+    margin-top: 5px;
+    text-align: center;
+}
+
+button {
+    display: block;
+    margin-right: 5px;
+    background-color: #dd2436;
+    color: #ffffff;
+    font-weight: bold;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+
+}
+
+button:hover {
+    background-color: #ff0000;
+}
+
+/* characterSelection.css */
+
+
+.characterSelection.open {
+    width: 25%;
+    height: 30%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-self: last baseline;
+    justify-content: center;
+}
+
+/* Position player1's character selection below the player container */
+.characterSelection.player1, .characterSelection.player2  {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    /* Add any other styles as needed */
+}

@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 html, body{
     width: 100%;
     height: 100%;
@@ -11,12 +12,30 @@ overflow-y: hidden;
 
 .board {
     padding-top: 50px;
+=======
+html,
+body {
+
+    padding: 0;
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    font-family: 'Istok Web', sans-serif;
+    font-family: 'League Spartan', sans-serif;
+    overflow-y: hidden;
+}
+
+.board {
+>>>>>>> Stashed changes
     height: 100%;
     display: grid;
     grid-template-columns: repeat(15, 35px);
     grid-template-rows: repeat(15, 35px); /* Add this line for rows */
     justify-content: center;
+<<<<<<< Updated upstream
 
+=======
+    margin: auto;
+>>>>>>> Stashed changes
 }
 
 h1 {
@@ -36,18 +55,30 @@ h1 {
     width: 100%;
 }
 
+<<<<<<< Updated upstream
 .App{
     height: 100%;
     width: 100%;
 }
+=======
+>>>>>>> Stashed changes
 
 #container {
+    flex-direction: row;
     height: 100%;
     width: 100%;
     position: relative;
+    justify-content: center;
+    margin-top: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
 }
 
+
 .board-cell {
+<<<<<<< Updated upstream
   display: flex;
   width: 35px;
   height: 35px;
@@ -58,6 +89,18 @@ h1 {
   align-items: center; /* Center the content vertically */
   margin: 0;
   padding: 0;
+=======
+    display: flex;
+    width: 35px;
+    height: 35px;
+    background: #f0f0f0;
+    border: 1px solid #525252;
+    cursor: pointer;
+    justify-content: center; /* Center the content horizontally */
+    align-items: center; /* Center the content vertically */
+    margin: 0;
+    padding: 0;
+>>>>>>> Stashed changes
 }
 
 .board-row {
@@ -88,5 +131,85 @@ h1 {
     background-color: black;
 }
 
+<<<<<<< Updated upstream
 .board-cell.clicked {
+=======
+.app-container {
+    position: relative;
+}
+
+.background-changer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background-size: cover;
+    background-position: center;
+}
+
+.icon-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    outline: none;
+}
+
+.icon-wrapper {
+    background: rgba(0, 0, 0, 0.3); /* Svart bakgrund med 30% genomsynlighet */
+    padding: 1px;
+    border-radius: 20%;
+}
+.icon {
+    filter: invert(100%); /* Ändrar färgen på ikonen till vit */
+    padding-left: 2px;
+    padding-top: 2px;
+}
+
+/* Player section */
+
+
+.player-section {
+    display: flex;
+    gap: 50px;
+    flex-direction: row;
+    width: 100%;
+    height: 20vh;
+    justify-content: center;
+
+}
+
+/* Styles for WinnerModule */
+.Winner-container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+
+    width: 44vw;
+    height: 43vh;
+    border-radius: 5px;
+    border: 1px solid black;
+    background-color: black;
+}
+
+.Winner-header {
+    margin-bottom: 2rem;
+    color: white;
+}
+
+.Winner-text {
+    margin: 0rem 3rem 2rem 3rem;
+    color: white;
+}
+
+.Winner-button {
+    width: 10vw;
+    height: 5vh;
+    color: yellow;
+    border: 2px solid yellow;
+    background-color: black;
+    border-radius: 5px;
+>>>>>>> Stashed changes
 }
