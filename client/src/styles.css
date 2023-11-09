@@ -102,6 +102,12 @@ h1 {
     background-position: center;
 }
 
+.game-section > img {
+    width: 200px;
+    margin: 30px auto 0;
+
+}
+
 .icon-button {
     background: none;
     border: none;

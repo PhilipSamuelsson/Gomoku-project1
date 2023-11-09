@@ -5,6 +5,7 @@ import Game from './components/Game';
 import LandingPage from './components/LandingPage/LandingPage';
 import BackgroundChanger from "./components/BackgroundChanger";
 import Rules from "./components/Rules/Rules";
+import Logo from './assets/white-logo.png'
 
 export default function App() {
   const [gameStarted, setGameStarted] = useState(false);
@@ -18,13 +19,15 @@ export default function App() {
     <div className="App">
       {gameStarted ? (
         // Render the game components when the game has started
-        <div>
+        <div className='game-section'>
+            <img src={Logo} alt="GOMOKU" />
           <section className="player-section">
             <Player playerNumber={1} />
             <Player playerNumber={2} />
           </section>
           <BackgroundChanger />
-          <Game>  <Rules/> </Game>
+          <Game>  </Game>
+          <Rules/> 
 
         </div>
       ) : (
