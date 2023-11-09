@@ -1,25 +1,61 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import '../components/player/player.css';
 import CharacterSelection from './characterSelection/CharacterSelection';
 
 
-function Player({ playerNumber }) {
-  const [isCharacterSelectionOpen, setCharacterSelectionOpen] = useState(false);
-  const [selectedCharacter, setSelectedCharacter] = useState(null);
-  const [playerName, setPlayerName] = useState(`Player ${playerNumber}`);
+function Player({ playerNumber, isCharacterSelectionEnabled }) {
 
+  const [isCharacterSelectionOpen, setCharacterSelectionOpen] = useState(false);
+
+  // Initialize with default values
+  const [selectedCharacter, setSelectedCharacter] = useState(
+    JSON.parse(localStorage.getItem(`selectedCharacter${playerNumber}`)) || null
+  );
+
+  // Initialize with default value
+  const [playerName, setPlayerName] = useState(
+    localStorage.getItem(`playerName${playerNumber}`) || `Player ${playerNumber}`
+  );
+
+  // Function to toggle the character selection modal
   const toggleCharacterSelection = () => {
-    setCharacterSelectionOpen(!isCharacterSelectionOpen);
+    // Only open the character selection if it's enabled
+    if (isCharacterSelectionEnabled) {
+      setCharacterSelectionOpen(!isCharacterSelectionOpen);
+    }
   };
 
+  // Function to select a character
   const selectCharacter = (character) => {
     setSelectedCharacter(character);
     setPlayerName(character.name);
     toggleCharacterSelection();
   };
 
+  useEffect(() => {
+    // Load the state from localStorage when the component mounts
+    const storedSelectedCharacter = localStorage.getItem(`selectedCharacter${playerNumber}`);
+    const storedPlayerName = localStorage.getItem(`playerName${playerNumber}`);
+
+    if (storedSelectedCharacter !== null) {
+      setSelectedCharacter(JSON.parse(storedSelectedCharacter));
+    }
+
+    if (storedPlayerName !== null) {
+      setPlayerName(storedPlayerName);
+    }
+  }, [playerNumber]);
+
+  // Save the state to localStorage whenever it changes
+  useEffect(() => {
+    localStorage.setItem(`selectedCharacter${playerNumber}`, JSON.stringify(selectedCharacter));
+    localStorage.setItem(`playerName${playerNumber}`, playerName);
+  }, [selectedCharacter, playerName, playerNumber]);
+
   const characterImageSrc = selectedCharacter ? selectedCharacter.image : '';
+
+  console.log('isCharacterSelectionEnabled:', isCharacterSelectionEnabled); // Log the game state
 
   return (
     <div className="playerContainer" onClick={toggleCharacterSelection}>
@@ -44,7 +80,7 @@ function Player({ playerNumber }) {
           </div>{/* ... (Player's rightContainer content) */}
         </div>
       </div>
-      <div className={`characterSelection ${isCharacterSelectionOpen ? 'open' : ''}`}>
+      <div className={`characterSelection ${isCharacterSelectionOpen && isCharacterSelectionEnabled ? 'open' : ''}`}>
         <CharacterSelection
           isOpen={isCharacterSelectionOpen}
           onClose={toggleCharacterSelection}
@@ -59,7 +95,7 @@ function Player({ playerNumber }) {
 
 Player.propTypes = {
   playerNumber: PropTypes.number.isRequired,
-
+  isCharacterSelectionEnabled: PropTypes.bool.isRequired, // A prop to enable or disable character selection
 };
 
 const starWarsCharacters = [
