@@ -6,7 +6,6 @@ import LandingPage from './components/LandingPage/LandingPage';
 import BackgroundChanger from "./components/BackgroundChanger";
 
 import Rules from "./components/Rules/Rules";
-import RestartButton from "./components/RestartButton";
 import Logo from './assets/white-logo.png'
 
 
@@ -29,26 +28,21 @@ export default function App() {
         <div>
           <BackgroundChanger />
 
-      <div className='game-section'>
+          <div className='game-section'>
             <img src={Logo} alt="GOMOKU" />
 
-          <section className="player-section">
-            <Player playerNumber={1} selectedCharacter={player1Character} />
-            <Player playerNumber={2} selectedCharacter={player2Character} />
-          </section>
+            <section className="player-section">
+              <Player playerNumber={1} selectedCharacter={player1Character} />
+              <Player playerNumber={2} selectedCharacter={player2Character} />
+            </section>
 
-          <BackgroundChanger />
-
-          <Game/>  
-          <Rules/> 
-
-
-
+            <Game />
+            <Rules />
+          </div>
         </div>
       ) : (
         // Render the LandingPage component until the Ready button is clicked
         <div>
-
           <LandingPage
             onReadyButtonClick={startGame}
             onSelectCharacter={(playerNumber, character) => {
@@ -61,7 +55,6 @@ export default function App() {
           />
         </div>
       )}
-
     </div>
   );
 }

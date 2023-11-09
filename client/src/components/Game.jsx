@@ -150,9 +150,9 @@ const Game = ({ player1Character, player2Character }) => {
                 </div>
             ) : (
                 <>
-
+        <RestartButton restartGame={restartGame} />
                     <Board board={board} handleMove={handleMove} />
-                    <RestartButton restartGame={restartGame} />
+
                 </>
 
             )}
@@ -168,4 +168,3 @@ Game.propTypes = {
   };
 
 export default Game
-
