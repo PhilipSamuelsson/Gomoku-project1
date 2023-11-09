@@ -190,3 +190,7 @@ button {
 .Winner-button:hover {
     background-color: rgb(41, 41, 41);
 }
+
+button {
+    display: inline-block;
+}
