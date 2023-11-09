@@ -3,9 +3,8 @@
 .rules-flex-div {
     width: 100%;
     height: 124px;
-
     position: absolute;
-    bottom: 5rem;
+    bottom: 3rem;
 }
 
 .rules-content {

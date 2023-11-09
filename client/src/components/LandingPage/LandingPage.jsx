@@ -1,4 +1,4 @@
-import  { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import ReadyButton from "../ReadyButton/ReadyButton";
 import Rules from "../Rules/Rules";
 import "./landingPage.css";
@@ -23,8 +23,8 @@ export default function LandingPage({ onReadyButtonClick, onSelectCharacter }) {
   useEffect(() => {
     // Check if both players have selected characters
     if (selectedCharacter1 && selectedCharacter2) {
-        console.log("selectedCharacter1", selectedCharacter1);
-        console.log("selectedCharacter2", selectedCharacter2);
+      console.log("selectedCharacter1", selectedCharacter1);
+      console.log("selectedCharacter2", selectedCharacter2);
       // Call the onReadyButtonClick function to start the game
       onReadyButtonClick();
     }

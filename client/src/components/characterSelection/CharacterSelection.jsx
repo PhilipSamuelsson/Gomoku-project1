@@ -2,7 +2,7 @@
 import PropTypes from 'prop-types';
 import './CharacterSelection.css'; // Import the CSS file
 
-const CharacterSelection = ({ characters, onSelectCharacter, isOpen, onClose, playerNumber  }) => {
+const CharacterSelection = ({ characters, onSelectCharacter, isOpen, onClose, playerNumber }) => {
   const closeCharacterSelection = () => {
     onClose();
   };

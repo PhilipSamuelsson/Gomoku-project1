@@ -150,7 +150,7 @@ const Game = ({ player1Character, player2Character }) => {
                 </div>
             ) : (
                 <>
-        <RestartButton restartGame={restartGame} />
+                    <RestartButton restartGame={restartGame} />
                     <Board board={board} handleMove={handleMove} />
 
                 </>
@@ -165,6 +165,6 @@ const Game = ({ player1Character, player2Character }) => {
 Game.propTypes = {
     player1Character: PropTypes.object.isRequired, // Add prop validation for player1Character
     player2Character: PropTypes.object.isRequired, // Add prop validation for player2Character
-  };
+};
 
 export default Game
