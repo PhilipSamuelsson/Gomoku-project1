@@ -6,23 +6,22 @@
 
 html,
 body {
-    width: 100%;
-    height: 100%;
+
     padding: 0;
     margin: 0;
     font-family: 'Inter', sans-serif;
     font-family: 'Istok Web', sans-serif;
     font-family: 'League Spartan', sans-serif;
-    overflow-y: show;
+    overflow-y: hidden;
 }
 
 .board {
-    padding-top: 10px;
     height: 100%;
     display: grid;
     grid-template-columns: repeat(15, 35px);
     grid-template-rows: repeat(15, 35px); /* Add this line for rows */
     justify-content: center;
+    margin: auto;
 }
 
 h1 {
@@ -42,23 +41,27 @@ h1 {
     width: 100%;
 }
 
-.App {
-    height: 100%;
-    width: 100%;
-}
 
 #container {
+    flex-direction: row;
     height: 100%;
     width: 100%;
     position: relative;
+    justify-content: center;
+    margin-top: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
 }
+
 
 .board-cell {
     display: flex;
     width: 35px;
     height: 35px;
     background: #f0f0f0;
-    border: 1px solid #dd2436;
+    border: 1px solid #525252;
     cursor: pointer;
     justify-content: center; /* Center the content horizontally */
     align-items: center; /* Center the content vertically */
@@ -119,7 +122,6 @@ h1 {
     border: none;
     cursor: pointer;
     outline: none;
-    margin-left: 60%;
 }
 
 .icon-wrapper {
@@ -135,16 +137,15 @@ h1 {
 
 /* Player section */
 
+
 .player-section {
     display: flex;
-    flex-direction: column;
-    justify-content: space-around;
     gap: 50px;
     flex-direction: row;
     width: 100%;
-    height: 30vh;
+    height: 20vh;
     justify-content: center;
-    align-items: center;
+
 }
 
 /* Styles for WinnerModule */
