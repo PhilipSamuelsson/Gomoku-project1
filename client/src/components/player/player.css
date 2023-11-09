@@ -2,8 +2,6 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Inter', sans-serif;
-    font-family: 'Istok Web', sans-serif;
     font-family: 'League Spartan', sans-serif;
 
 }
@@ -33,23 +31,25 @@ img {
 }
 
 .playerContainer {
-    height: 60%;
-    width: 15%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center; /* Center items horizontally */
     text-align: center; /* Center text horizontally */
-    border: 1px solid #dd2436;
+
+}
+
+.player {
+    display: flex;
+    background-color: rgba(0, 0, 0, 0.438);
+
 
 }
 
 .player1,
 .player2 {
-    border-radius: 5px;
     display: flex;
-    height: 100%; /* Set desired height */
-    width: 100%; /* Each player takes up half of the parent container */
-    background-color: #ffffff;
+
 }
 
 .characterContainer {
@@ -60,59 +60,78 @@ img {
 .topLeft,
 .botLeft {
     display: flex;
-    height: 50%;
+    height: 100%;
     margin: 0 auto;
     padding: 5px;
     align-items: center; /* Center items horizontally */
     text-align: center; /* Center text horizontally */
+    color: white;
 }
 
 .topLeft, .textTop {
+    width: 100%;
     margin: auto;
     justify-content: center;
     text-align: center;
     font-family: gabriella, sans-serif;
+    color: white;
 
 }
 
-.leftContainer {
+.topRight {
+    width: 100%;
+    margin: auto;
+    justify-content: center;
+    text-align: center;
+    font-family: gabriella, sans-serif;
+    color: white;
+
+}
+
+.leftContainer1 {
     display: flex;
     padding: 15px;
     box-sizing: border-box;
-    width: 60%;
+    width: 50%;
     align-items: center;
     justify-content: center;
 }
 
-.rightContainer {
+.leftContainer2 {
     display: flex;
     padding: 15px;
     box-sizing: border-box;
-    width: 40%;
+    width: 50%;
     align-items: center;
     justify-content: center;
 }
 
-.leftContainer {
+.rightContainer1 {
     display: flex;
-    flex-direction: column;
+    padding: 15px;
+    box-sizing: border-box;
+    width: 50%;
     align-items: center;
-}
-
-.rightContainer {
     justify-content: center;
+}
+.rightContainer2 {
+    display: flex;
+    padding: 15px;
+    box-sizing: border-box;
+    width: 50%;
     align-items: center;
+    justify-content: center;
 }
 
 .profileCard {
     display: flex;
     width: 75px;
     height: 75px;
-    background-color: #f0f0f0;
+    background-color: rgba(190, 182, 182, 0.288);
     border-radius: 50%;
-    border: 2px solid #dd2436;
     overflow: hidden; /* Ensure the image stays within the circle */
     text-align: center;
+    border: 1px solid rgb(70, 67, 67);
 }
 
 .profileImage, img {
@@ -126,13 +145,15 @@ img {
 
 
 .timer {
+
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 2px solid #dd2436;
     padding-left: 20px;
     padding-right: 20px;
+
 }
+
 
 .container {
     max-width: 1080px;

@@ -29,7 +29,6 @@ export default function App() {
           <BackgroundChanger />
 
           <div className='game-section'>
-            <img src={Logo} alt="GOMOKU" />
 
             <section className="player-section">
               <Player playerNumber={1} selectedCharacter={player1Character} />

@@ -58,27 +58,53 @@ function Player({ playerNumber, isCharacterSelectionEnabled }) {
   console.log('isCharacterSelectionEnabled:', isCharacterSelectionEnabled); // Log the game state
 
   return (
-    <div className="playerContainer" onClick={toggleCharacterSelection}>
-      <div className={`player${playerNumber}`}>
-        <div className="leftContainer">
-          <div className="topLeft">
-            <div className="textTop">{playerName}</div>
-          </div>
-          <div className="botLeft">
-            <div className="timer">
-              <div id={`timerDisplay${playerNumber}`}>00:00</div>
+    <div className={`playerContainer player${playerNumber}`} onClick={toggleCharacterSelection}>
+      <div className="player">
+        {playerNumber === 1 ? (
+          <>
+            <div className="leftContainer1">
+              <div className="topLeft">
+                <div className="textTop">{playerName}</div>
+              </div>
+              {/* <div className="botLeft">
+                <div className="timer">
+                  <div id={`timerDisplay${playerNumber}`}></div>
+                </div>
+              </div> */}
             </div>
-          </div>
-        </div>
-        <div className="rightContainer">
-          <div className="profileCard">
-            <img
-              className="profileImage"
-              src={characterImageSrc}
-              alt="Profile Image"
-            />
-          </div>{/* ... (Player's rightContainer content) */}
-        </div>
+            <div className="rightContainer1">
+              <div className="profileCard">
+                <img
+                  className="profileImage"
+                  src={characterImageSrc}
+                  alt="Profile Image"
+                />
+              </div>{/* ... (Player's rightContainer content) */}
+            </div>
+          </>
+        ) : (
+          <>
+            <div className="leftContainer2">
+              <div className="profileCard">
+                <img
+                  className="profileImage"
+                  src={characterImageSrc}
+                  alt="Profile Image"
+                />
+              </div>
+            </div>
+            <div className="rightContainer2">
+              <div className="topRight">
+                <div className="textTop">{playerName}</div>
+              </div>
+              {/* <div className="botLeft">
+                <div className="timer">
+                  <div id={`timerDisplay${playerNumber}`}></div>
+                </div>
+              </div> */}
+            </div>
+          </>
+        )}
       </div>
       <div className={`characterSelection ${isCharacterSelectionOpen && isCharacterSelectionEnabled ? 'open' : ''}`}>
         <CharacterSelection
