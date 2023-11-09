@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import '../components/player/player.css';
 import CharacterSelection from './characterSelection/CharacterSelection';
 
+
 function Player({ playerNumber }) {
   const [isCharacterSelectionOpen, setCharacterSelectionOpen] = useState(false);
   const [selectedCharacter, setSelectedCharacter] = useState(null);
@@ -23,13 +24,6 @@ function Player({ playerNumber }) {
   return (
     <div className="playerContainer" onClick={toggleCharacterSelection}>
       <div className={`player${playerNumber}`}>
-        <div className="profileCard">
-          <img
-            className="profileImage"
-            src={characterImageSrc}
-            alt="Profile Image"
-          />
-        </div>
         <div className="leftContainer">
           <div className="topLeft">
             <div className="textTop">{playerName}</div>
@@ -40,7 +34,15 @@ function Player({ playerNumber }) {
             </div>
           </div>
         </div>
-        <div className="rightContainer">{/* ... (Player's rightContainer content) */}</div>
+        <div className="rightContainer">
+          <div className="profileCard">
+            <img
+              className="profileImage"
+              src={characterImageSrc}
+              alt="Profile Image"
+            />
+          </div>{/* ... (Player's rightContainer content) */}
+        </div>
       </div>
       <div className={`characterSelection ${isCharacterSelectionOpen ? 'open' : ''}`}>
         <CharacterSelection
@@ -68,7 +70,7 @@ const starWarsCharacters = [
   {
     name: 'Princess Leia',
     image: 'https://i.pinimg.com/originals/be/ae/49/beae4969d8151ee3405b9b8131e2081f.png',
-  },{
+  }, {
     name: 'Darth Vader',
     image: 'https://i.pinimg.com/originals/9f/9f/73/9f9f73b4b9b89101f9419241d64233d3.png'
   }
