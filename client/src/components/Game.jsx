@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
 import Board from './Board';
 import WinnerModule from './WinnerModule';
+import PropTypes from 'prop-types'; // Import PropTypes
 
-const Game = () => {
+const Game = ({ player1Character, player2Character }) => {
     const [board, setBoard] = useState([...Array(15)].map(() => Array(15).fill(null)));
     const [currentPlayer, setCurrentPlayer] = useState('player1');
     const [gameOver, setGameOver] = useState(false);
@@ -151,5 +152,10 @@ function checkForWin(board, row, col, player) {
         </div>
     )
 }
+
+Game.propTypes = {
+    player1Character: PropTypes.object.isRequired, // Add prop validation for player1Character
+    player2Character: PropTypes.object.isRequired, // Add prop validation for player2Character
+  };
 
 export default Game
